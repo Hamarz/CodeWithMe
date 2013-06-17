@@ -1,7 +1,25 @@
 @CODE:
 
-Simplify the code to make it look clean and clear.
+@TODO: Simplify the code to make it look clean and clear.
 
 
-@Client
+:::ISSUES/TODO:::
+
+@Client & Server
+
+@ISSUE: Deleting code on the client doesn't work correctly on the server (Unless my recent change fixed this)
+@ISSUE: Once you press disconnect the client crashes
+@ISSUE: After disconnecting and exiting the program might throw a Socket runtime error
+@ISSUE: If the server goes down, the client will more than likely crash
+
+
+@TODO: Deleting multiple (Selected) code won't be read by the server
+@TODO: Free code where you want in the textbox without the line moving once you receive text from the server or client
+@TODO: Make the server have a 'Stop Server' option once it has been started.
+
+@UI
+
+@UI: Perhaps make a better UI as this one is apparently too plain for some people. Wink, wink.
+
+
 
