@@ -212,32 +212,45 @@ namespace CodeWithMe
         /* RichTextBox WriteLog */
         public void WriteLog(string txt)
         {
-            richTextBoxLogs.AppendText(txt);
-            richTextBoxLogs.AppendText(Environment.NewLine);
+            MethodInvoker invoker = new MethodInvoker(delegate() {
+                richTextBoxLogs.AppendText(txt);
+                richTextBoxLogs.AppendText(Environment.NewLine); 
+            });
+
+            this.Invoke(invoker);
         }
 
         /* (Client) Enable Components after server accepts */
         public void EnableComponents(bool disconnected, bool disable)
         {
-            if (disconnected) // If the client disconnects, re-enable everything
+            MethodInvoker invoker;
+
+            if (disconnected)
             {
-                richTextBoxCode.Enabled = false;
-                buttonServer.Enabled = true;
-                textBoxHost.Enabled = true;
-                textBoxUser.Enabled = true;
-                textBoxPort.Enabled = true;
+                invoker = new MethodInvoker(delegate() {
+                    richTextBoxCode.Enabled = false;
+                    buttonServer.Enabled = true;
+                    textBoxHost.Enabled = true;
+                    textBoxUser.Enabled = true;
+                    textBoxPort.Enabled = true;
+                });
+                this.Invoke(invoker);
                 return;
             }
 
-            if (disable) // If we are connected to the server, enable the code box
-                richTextBoxCode.Enabled = true;
-            else
-            {
-                buttonServer.Enabled = false;
-                textBoxHost.Enabled = false;
-                textBoxUser.Enabled = false;
-                textBoxPort.Enabled = false;
-            }
+            invoker = new MethodInvoker(delegate() {
+                if (disable)
+                    richTextBoxCode.Enabled = true;
+                else
+                {
+                    buttonServer.Enabled = false;
+                    textBoxHost.Enabled = false;
+                    textBoxUser.Enabled = false;
+                    textBoxPort.Enabled = false;
+                }
+            });
+
+            this.Invoke(invoker);
         }
         #endregion
 

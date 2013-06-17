@@ -21,7 +21,7 @@ namespace CodeWithMe
         {
             try
             {
-                Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 client.BeginConnect(host, port, ConnectCallback, client);
                 return true;
             }
@@ -101,7 +101,7 @@ namespace CodeWithMe
             catch (Exception ex)
             {
                 MainForm.mainForm.WriteLog(ex.Message);
-                client.Shutdown(SocketShutdown.Both);
+                //client.Shutdown(SocketShutdown.Both);
                 client.Close();
             }
         }

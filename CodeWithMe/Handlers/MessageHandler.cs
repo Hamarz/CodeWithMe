@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace CodeWithMe
 {
@@ -11,13 +12,22 @@ namespace CodeWithMe
         /// <param name="server">Server</param>
         public static void HandleCodeMsg(string msg, Server server)
         {
-            MainForm.mainForm.richTextBoxCode.AppendText(msg);
+            MethodInvoker invoker = new MethodInvoker(delegate() {
+                MainForm.mainForm.richTextBoxCode.AppendText(msg);
+            });
+
+            invoker.Invoke();
         }
 
         public static void HandleChatMsg(string msg, Server server)
         {
-            MainForm.mainForm.richTextBoxChat.AppendText(msg);
-            MainForm.mainForm.richTextBoxChat.AppendText(Environment.NewLine);
+            MethodInvoker invoker = new MethodInvoker(delegate()
+            {
+                MainForm.mainForm.richTextBoxChat.AppendText(msg);
+                MainForm.mainForm.richTextBoxChat.AppendText(Environment.NewLine);
+            });
+
+            invoker.Invoke();
         }
 
         /// <summary>
