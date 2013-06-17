@@ -16,7 +16,7 @@ namespace CodeWithMe
                 MainForm.mainForm.richTextBoxCode.AppendText(msg);
             });
 
-            invoker.Invoke();
+            MainForm.mainForm.Invoke(invoker);
         }
 
         public static void HandleChatMsg(string msg, Server server)
@@ -27,7 +27,7 @@ namespace CodeWithMe
                 MainForm.mainForm.richTextBoxChat.AppendText(Environment.NewLine);
             });
 
-            invoker.Invoke();
+            MainForm.mainForm.Invoke(invoker);
         }
 
         /// <summary>
@@ -39,10 +39,13 @@ namespace CodeWithMe
         {
             if (length < 0)
                 return;
+            MethodInvoker invoker = new MethodInvoker(delegate() {
+                MainForm.mainForm.richTextBoxCode.Select(length, 1);
+                MainForm.mainForm.richTextBoxCode.SelectedText = "";
+                MainForm.mainForm.richTextBoxCode.SelectionStart = length;
+            });
 
-            MainForm.mainForm.richTextBoxCode.Select(length, 1);
-            MainForm.mainForm.richTextBoxCode.SelectedText = "";
-            MainForm.mainForm.richTextBoxCode.SelectionStart = length;
+            MainForm.mainForm.Invoke(invoker);
         }
     }
 }
