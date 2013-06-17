@@ -1,0 +1,7 @@
+@CODE:
+
+Simplify the code to make it look clean and clear.
+
+
+@Client
+
